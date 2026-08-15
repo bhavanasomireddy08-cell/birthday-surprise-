@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prudhvi's Birthday Surprise 💗</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family: "Georgia", serif;
+    background:linear-gradient(135deg,#ffe6f0,#e9e0ff,#fff1dc);
+    min-height:100vh;
+    overflow-x:hidden;
+    color:#4b3040;
+}
+
+.screen{
+    min-height:100vh;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:25px;
+    animation:fadeIn .8s ease;
+}
+
+.screen.active{
+    display:flex;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+h1{
+    font-size:clamp(2rem,8vw,4rem);
+    margin-bottom:20px;
+}
+
+h2{
+    font-size:clamp(1.5rem,6vw,2.5rem);
+    margin-bottom:18px;
+}
+
+p{
+    font-size:1.05rem;
+    line-height:1.7;
+    max-width:650px;
+}
+
+button{
+    border:none;
+    padding:13px 28px;
+    margin:10px;
+    border-radius:30px;
+    background:#ff6f9f;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow:0 7px 18px #c95d7d55;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.secondary{
+    background:#8f7aa8;
+}
+
+/* SCANNER */
+.scanner{
+    width:190px;
+    height:190px;
+    border:4px solid #ff6f9f;
+    border-radius:20px;
+    position:relative;
+    margin-bottom:30px;
+    box-shadow:0 0 30px #ff6f9f88;
+}
+
+.scanner:after{
+    content:"";
+    position:absolute;
+    left:10px;
+    right:10px;
+    height:4px;
+    background:#ff3f7f;
+    top:20px;
+    animation:scan 2s infinite;
+}
+
+@keyframes scan{
+    0%{top:20px}
+    50%{top:165px}
+    100%{top:20px}
+}
+
+.scan-text{
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+/* BALLOONS */
+.balloons{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;
+    max-width:700px;
+    margin:25px auto;
+}
+
+.balloon{
+    width:90px;
+    height:115px;
+    border-radius:50% 50% 45% 45%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:30px;
+    position:relative;
+    box-shadow:0 8px 20px #5554;
+    animation:float 2.5s infinite ease-in-out;
+}
+
+.balloon:nth-child(1){background:#ff8fab}
+.balloon:nth-child(2){background:#a78bfa}
+.balloon:nth-child(3){background:#6ee7b7}
+.balloon:nth-child(4){background:#fbbf24}
+.balloon:nth-child(5){background:#60a5fa}
+.balloon:nth-child(6){background:#fb7185}
+
+.balloon:after{
+    content:"";
+    position:absolute;
+    bottom:-35px;
+    width:2px;
+    height:38px;
+    background:#555;
+}
+
+@keyframes float{
+    50%{transform:translateY(-12px)}
+}
+
+.popped{
+    transform:scale(0);
+    opacity:0;
+    pointer-events:none;
+}
+
+.message-box{
+    background:#ffffffaa;
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:20px;
+    max-width:550px;
+    min-height:80px;
+    margin:15px;
+}
+
+/* NOTE */
+.note{
+    background:#fffdf0;
+    max-width:600px;
+    padding:35px;
+    border-radius:8px;
+    box-shadow:0 15px 35px #5553;
+    transform:rotate(-1deg);
+    border-left:5px solid #e7c77b;
+}
+
+.note p{
+    font-family:"Georgia",serif;
+    font-style:italic;
+}
+
+/* GIFT */
+.gift{
+    font-size:130px;
+    animation:bounce 1.5s infinite;
+    margin:20px;
+}
+
+@keyframes bounce{
+    50%{transform:translateY(-15px)}
+}
+
+/* PHOTOS */
+.photos{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    margin:20px;
+}
+
+.photos img{
+    width:180px;
+    height:230px;
+    object-fit:cover;
+    border-radius:18px;
+    box-shadow:0 10px 25px #5554;
+    border:5px solid white;
+}
+
+/* LETTER */
+.envelope{
+    font-size:100px;
+    cursor:pointer;
+    animation:float 2s infinite;
+}
+
+.letter{
+    display:none;
+    max-width:700px;
+    background:#fffaf1;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 15px 40px #5554;
+    text-align:left;
+    margin:20px;
+    line-height:1.9;
+}
+
+.letter.show{
+    display:block;
+    animation:letterOpen 1s ease;
+}
+
+@keyframes letterOpen{
+    from{opacity:0;transform:scale(.8)}
+    to{opacity:1;transform:scale(1)}
+}
+
+/* CAKE */
+.cake{
+    font-size:150px;
+    margin:20px;
+    animation:float 2s infinite;
+}
+
+.final{
+    font-size:clamp(1.8rem,7vw,3.5rem);
+    font-weight:bold;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{transform:scale(1.06)}
+}
+
+/* HEARTS */
+.heart{
+    position:fixed;
+    font-size:25px;
+    animation:heartFall 4s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes heartFall{
+    from{
+        transform:translateY(-50px) rotate(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(100vh) rotate(360deg);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 1 SCANNER -->
+<section class="screen active" id="screen1">
+
+    <div class="scanner"></div>
+
+    <div class="scan-text">
+        Scanning birthday surprise... 🔍✨
+    </div>
+
+    <button onclick="showScreen(2)">
+        SCAN COMPLETE 💗
+    </button>
+
+</section>
+
+
+<!-- 2 ARE YOU PRUDHVI -->
+<section class="screen" id="screen2">
+
+    <h2>Are you Prudhvi? 👀💗</h2>
+
+    <div>
+        <button onclick="showScreen(3)">YES 💗</button>
+        <button class="secondary" onclick="wrong()">NO 😶</button>
+    </div>
+
+</section>
+
+
+<!-- 3 BIRTHDAY -->
+<section class="screen" id="screen3">
+
+    <h1>HAPPIEST BIRTHDAY RAHH 💗🥹🫂</h1>
+
+    <p>
+        Are you ready for your birthday surprise? 👀🎁✨
+    </p>
+
+    <div>
+        <button onclick="showScreen(4)">YESSS 🥹💗</button>
+        <button class="secondary" onclick="wrong()">NO 😭</button>
+    </div>
+
+</section>
+
+
+<!-- 4 BALLOONS -->
+<section class="screen" id="screen4">
+
+    <h2>POP THE BALLOONS 🎈</h2>
+
+    <p>Each balloon has a little message for you 💗</p>
+
+    <div class="balloons">
+
+        <div class="balloon" onclick="popBalloon(this,0)">🎈</div>
+        <div class="balloon" onclick="popBalloon(this,1)">🎈</div>
+        <div class="balloon" onclick="popBalloon(this,2)">🎈</div>
+        <div class="balloon" onclick="popBalloon(this,3)">🎈</div>
+        <div class="balloon" onclick="popBalloon(this,4)">🎈</div>
+        <div class="balloon" onclick="popBalloon(this,5)">🎈</div>
+
+    </div>
+
+    <div class="message-box" id="balloonMessage">
+        Tap a balloon 🎈
+    </div>
+
+    <button onclick="showScreen(5)">
+        NEXT ✨
+    </button>
+
+</section>
+
+
+<!-- 5 NOTE -->
+<section class="screen" id="screen5">
+
+    <h2>A Little Note For You 📝💗</h2>
+
+    <div class="note">
+
+        <p>
+        Prudhvi, nee birthday roju ninnu konchem special ga feel
+        cheyyalani ee small surprise 🥹💗 Nee life lo eppudu
+        happiness, success, peace undali. Nuvvu always ilaane
+        smile chesthu, happy ga undali. Thank you for being such
+        a wonderful person in my life. Happiest Birthdayyy! 🫂🎂✨
+        </p>
+
+    </div>
+
+    <button onclick="showScreen(6)">
+        NEXT 💗
+    </button>
+
+</section>
+
+
+<!-- 6 GIFT -->
+<section class="screen" id="screen6">
+
+    <h2>A Small Gift For You 🎁</h2>
+
+    <div class="gift">🎁</div>
+
+    <p>There is something waiting inside... 👀✨</p>
+
+    <div>
+        <button onclick="showScreen(7)">OPEN 🎁</button>
+        <button class="secondary" onclick="showScreen(3)">EXIT</button>
+    </div>
+
+</section>
+
+
+<!-- 7 PHOTOS -->
+<section class="screen" id="screen7">
+
+    <h2>Some Beautiful Memories 📸💗</h2>
+
+    <div class="photos">
+
+        <img src="photo1.jpg" alt="Prudhvi photo 1">
+        <img src="photo2.jpg" alt="Prudhvi photo 2">
+        <img src="photo3.jpg" alt="Prudhvi photo 3">
+
+    </div>
+
+    <button onclick="showScreen(8)">
+        NEXT 🫂
+    </button>
+
+</section>
+
+
+<!-- 8 LETTER -->
+<section class="screen" id="screen8">
+
+    <h2>A Letter For You 💌</h2>
+
+    <div class="envelope" onclick="openLetter()">
+        💌
+    </div>
+
+    <p>Tap the letter 💗</p>
+
+    <div class="letter" id="letter">
+
+        <p>
+        Prudhvi, ee roju nee birthday kabatti neeku oka small
+        surprise ivvali anipinchindhi, kani aa surprise kanna naa
+        heart lo unna konni words neetho share cheskovali anipinchindhi
+        🥹💗
+        </p>
+
+        <br>
+
+        <p>
+        Nuvvu naa life lo oka really special person, nee tho matladina
+        small moments kuda sometimes chala memorable ga untayi.
+        Nuvvu eppudu happy ga, peaceful ga, confident ga undali ani
+        heartfully korukuntunna.
+        </p>
+
+        <br>
+
+        <p>
+        Life lo enni ups and downs vachina, nuvvu nee smile ni matram
+        eppudu lose avvakudadhu. Nee dreams anni one by one achieve
+        cheskovali, nee hard work ki manchi results ravali, and every
+        coming year inka beautiful memories tho fill avvali. 🫂✨
+        </p>
+
+        <br>
+
+        <p>
+        Nuvvu deserve chese happiness, success, love and respect anni
+        neeku dorakali. Ee birthday nundi nee life lo oka beautiful
+        new chapter start avvali ani korukuntunna.
+        </p>
+
+        <br>
+
+        <p>
+        And finally… thank you for being YOU, Prudhvi. 💗
+        Once again, Happiest Birthdayyy! 🎂🥳🫂✨
+        Ee day ni enjoy cheyyi, full ga smile cheyyi, because today
+        is all about YOU! 💕
+        </p>
+
+    </div>
+
+    <button onclick="showScreen(9)">
+        NEXT ✨
+    </button>
+
+</section>
+
+
+<!-- 9 CAKE -->
+<section class="screen" id="screen9">
+
+    <h2>One Last Birthday Moment... 🎂</h2>
+
+    <div class="cake" id="cake">
+        🎂
+    </div>
+
+    <button onclick="blowCandle()">
+        BLOW THE CANDLE 🕯️
+    </button>
+
+</section>
+
+
+<!-- 10 FINAL -->
+<section class="screen" id="screen10">
+
+    <div class="final">
+        ONCE AGAIN<br>
+        HAPPY BIRTHDAY RAH... ❤️🫶
+    </div>
+
+    <p style="margin-top:25px;">
+        Keep smiling always, Prudhvi. 💗🫂✨
+    </p>
+
+</section>
+
+
+<script>
+
+const messages = [
+    "You make every moment brighter ✨",
+    "So lucky to have you in my life 🫂",
+    "Keep smiling always, Prudhvi 💗",
+    "You deserve all the happiness 🥹",
+    "Never change, stay this amazing! 🌸",
+    "Once again, Happiest Birthdayyy! 🎂💗"
+];
+
+function showScreen(number){
+
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
+
+    document.getElementById("screen"+number)
+        .classList.add("active");
+
+    window.scrollTo(0,0);
+
+}
+
+function wrong(){
+
+    alert("Heyyy 😭 Try YES once! This surprise is only for Prudhvi 💗");
+}
+
+function popBalloon(balloon,index){
+
+    document.getElementById("balloonMessage").innerText =
+        messages[index];
+
+    balloon.classList.add("popped");
+
+    createHearts(5);
+
+}
+
+function openLetter(){
+
+    document.getElementById("letter")
+        .classList.add("show");
+
+}
+
+function blowCandle(){
+
+    document.getElementById("cake").innerHTML = "🎂✨";
+
+    showScreen(10);
+
+    createHearts(35);
+
+}
+
+function createHearts(amount){
+
+    for(let i=0;i<amount;i++){
+
+        const heart=document.createElement("div");
+
+        heart.className="heart";
+
+        heart.innerHTML=[
+            "💗","💕","💖","✨","🥹","🫂"
+        ][Math.floor(Math.random()*6)];
+
+        heart.style.left=Math.random()*100+"vw";
+
+        heart.style.animationDuration=
+            (2+Math.random()*3)+"s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },5000);
+
+    }
+
+}
+
+</script>
+
+</body>
+          </html>
